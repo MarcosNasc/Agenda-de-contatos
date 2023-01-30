@@ -23,15 +23,15 @@ namespace Agenda.Services
              return _repository.Update(contato);
         }
 
-        public Contato? BuscarPorId(int id)
+        public Task<Contato?> BuscarPorId(int id)
         {
-            var contato = _repository.Get(id).Result;
+            var contato = _repository.Get(id);
             return contato;
         }
 
-        public IEnumerable<Contato>? ListarTodos()
+        public Task<IEnumerable<Contato?>> ListarTodos()
         {
-            var contatos = _repository.GetAll().Result;
+            var contatos = _repository.GetAll();
             return contatos;
         }
 

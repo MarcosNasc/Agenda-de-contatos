@@ -20,20 +20,20 @@ namespace Agenda.Controllers
         [HttpGet("Listar")]
         public async Task<IActionResult> ListarTodos()
         {
-            var contatos = _contatoService.ListarTodos();
+            var contatos = await _contatoService.ListarTodos();
             return Ok(contatos);
-        }
+        } 
 
         [HttpGet("BuscarPorId")]
         public async Task<IActionResult> BuscarPorId(int id)
         {
-            var contato = _contatoService.BuscarPorId(id);
+            var contato = await _contatoService.BuscarPorId(id);
             return Ok(contato);
 
         }
 
         [HttpPost("Adicionar")]
-        public async Task<IActionResult> Adicionar(AdicionarContatoDTO dto)
+        public IActionResult Adicionar(AdicionarContatoDTO dto)
         {
             var entity = new Contato().DtoToEntity(dto);
             var contato = _contatoService.Adicionar(entity);
@@ -42,7 +42,7 @@ namespace Agenda.Controllers
         }
 
         [HttpPut("Atualizar")]
-        public async Task<IActionResult> Atualizar(EditarContatoDTO dto)
+        public  IActionResult Atualizar(EditarContatoDTO dto)
         {
             var entity = new Contato().DtoToEntity(dto);
             var contato = _contatoService.Atualizar(entity);
@@ -50,9 +50,9 @@ namespace Agenda.Controllers
         }
 
         [HttpDelete("Remover")]
-        public async Task<IActionResult> Remover(int id)
+        public IActionResult Remover(int id)
         {
-           _contatoService.Remover(id);
+            _contatoService.Remover(id);
             return Ok();
         }
     }
