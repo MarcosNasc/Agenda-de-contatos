@@ -1,13 +1,13 @@
 ﻿using Agenda.Models;
 
-namespace Agenda.Iterfaces
+namespace Agenda.Repository.Iterfaces
 {
     public interface IGenericRepository<T> where T : Entity
     {
         Task<IEnumerable<T>> GetAll();
         Task<T> Get(int id);
-        Task<T> Insert(T entity);
-        Task<T> Update(T entity);
+        T Insert(T entity);
+        T Update(T entity);
         void Delete(int id);
     }
 }

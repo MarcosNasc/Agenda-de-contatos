@@ -1,6 +1,6 @@
 ﻿using Agenda.Data;
-using Agenda.Iterfaces;
 using Agenda.Models;
+using Agenda.Repository.Iterfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Agenda.Repository
@@ -28,14 +28,14 @@ namespace Agenda.Repository
             return entity;
         }
 
-        public async Task<T> Insert(T entity)
+        public T Insert(T entity)
         {
             _table.Add(entity);
-            Save();
+          _context.SaveChanges();
             return entity;
         }
 
-        public async Task<T> Update(T entity)
+        public T Update(T entity)
         {
             _table.Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;
@@ -43,13 +43,13 @@ namespace Agenda.Repository
             return entity;
         }
 
-        public async void Delete(int id)
+        public  void Delete(int id)
         {
             T entity =  GetById(id);
             if (entity != null)
             {
                 _table.Remove(entity);
-                Save();
+                _context.SaveChanges();
             }
         }
 
@@ -57,11 +57,6 @@ namespace Agenda.Repository
         {
             var entity =  _table.FirstOrDefault(it => it.Id == id);
             return entity;
-        }
-
-        private void Save()
-        {
-            _context.SaveChangesAsync();
         }
     }
 }
