@@ -1,7 +1,8 @@
-﻿using Agenda.Iterfaces;
-using Agenda.Models;
-using Agenda.ViewModels;
+﻿using Agenda.Models;
+using Agenda.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using Agenda.Repository.Iterfaces;
+using Agenda.Services.Interfaces;
 
 namespace Agenda.Controllers
 {
@@ -9,59 +10,50 @@ namespace Agenda.Controllers
     [Route("v1/[controller]")]
     public class ContatoController : ControllerBase
     {
-        private readonly IGenericRepository<Contato> _repository;
+        private readonly IContatoService _contatoService;
 
-        public ContatoController(IGenericRepository<Contato> repository)
+        public ContatoController(IContatoService contatoService)
         {
-            _repository = repository;
+            _contatoService = contatoService;
         }
 
         [HttpGet("Listar")]
         public async Task<IActionResult> ListarTodos()
         {
-            var contatos = _repository.GetAll().Result;
-            if (!contatos.Any())
-            {
-                return Ok("Não existem contatos");
-            }
+            var contatos = _contatoService.ListarTodos();
             return Ok(contatos);
         }
 
         [HttpGet("BuscarPorId")]
         public async Task<IActionResult> BuscarPorId(int id)
         {
-            var contato = _repository.Get(id).Result;
-            if (contato == null)
-            {
-                return NotFound();
-            }
+            var contato = _contatoService.BuscarPorId(id);
             return Ok(contato);
 
         }
 
         [HttpPost("Adicionar")]
-        public async Task<IActionResult> Adicionar(AdicionarContatoViewModel viewModel)
+        public async Task<IActionResult> Adicionar(AdicionarContatoDTO dto)
         {
-            var entity = new Contato().ViewModelToEntity(viewModel);
-            var contato = _repository.Insert(entity).Result;
+            var entity = new Contato().DtoToEntity(dto);
+            var contato = _contatoService.Adicionar(entity);
             return Ok(contato);
 
         }
 
         [HttpPut("Atualizar")]
-        public async Task<IActionResult> Atualizar(EditarContatoViewModel viewModel)
+        public async Task<IActionResult> Atualizar(EditarContatoDTO dto)
         {
-            var entity = new Contato().ViewModelToEntity(viewModel);
-            var contato = _repository.Update(entity).Result;
+            var entity = new Contato().DtoToEntity(dto);
+            var contato = _contatoService.Atualizar(entity);
             return Ok(contato);
         }
 
         [HttpDelete("Remover")]
         public async Task<IActionResult> Remover(int id)
         {
-            _repository.Delete(id);
+           _contatoService.Remover(id);
             return Ok();
         }
-
     }
 }

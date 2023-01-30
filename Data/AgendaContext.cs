@@ -10,7 +10,7 @@ namespace Agenda.Data
 
         public AgendaContext(DbContextOptions<AgendaContext> options) : base(options)
         {
-
+            Database.Migrate();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -1,4 +1,4 @@
-﻿using Agenda.ViewModels;
+﻿using Agenda.Dtos;
 
 namespace Agenda.Models
 {
@@ -32,30 +32,30 @@ namespace Agenda.Models
 
         public Contato() { }
 
-        public  Contato ViewModelToEntity(AdicionarContatoViewModel viewModel)
+        public  Contato DtoToEntity(AdicionarContatoDTO dto)
         {
             Contato contato = new Contato();
-            contato.Nome = viewModel.Nome;
-            contato.Email = viewModel.Email;
-            contato.Telefone = viewModel.Telefone;
-            contato.Whatsapp = viewModel.Whatsapp;
-            contato.Instagram  =  viewModel.Instagram;
-            contato.Telegram =  viewModel.Telegram;
-            contato.Status = viewModel.Status;
+            contato.Nome = dto.Nome;
+            contato.Email = dto.Email;
+            contato.Telefone = dto.Telefone;
+            contato.Whatsapp = dto.Whatsapp;
+            contato.Instagram  =  dto.Instagram;
+            contato.Telegram =  dto.Telegram;
+            contato.Status = dto.Status;
             return contato;
         }
 
-        public  Contato ViewModelToEntity(EditarContatoViewModel viewModel)
+        public  Contato DtoToEntity(EditarContatoDTO dto)
         {
             Contato contato = new Contato();
-            contato.Id = viewModel.Id;
-            contato.Nome = viewModel.Nome;
-            contato.Email = viewModel.Email;
-            contato.Telefone = viewModel.Telefone;
-            contato.Whatsapp = viewModel.Whatsapp;
-            contato.Instagram = viewModel.Instagram;
-            contato.Telegram = viewModel.Telegram;
-            contato.Status = viewModel.Status;
+            contato.Id = dto.Id;
+            contato.Nome = dto.Nome;
+            contato.Email = dto.Email;
+            contato.Telefone = dto.Telefone;
+            contato.Whatsapp = dto.Whatsapp;
+            contato.Instagram = dto.Instagram;
+            contato.Telegram = dto.Telegram;
+            contato.Status = dto.Status;
             return contato;
         }
 

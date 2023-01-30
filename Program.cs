@@ -1,7 +1,9 @@
 using Agenda.Data;
-using Agenda.Iterfaces;
 using Agenda.Models;
 using Agenda.Repository;
+using Agenda.Repository.Iterfaces;
+using Agenda.Services;
+using Agenda.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +18,7 @@ void ConfigureServices(WebApplicationBuilder builder)
 {
     builder.Services.AddControllers();
     ConfigureDatabase(builder);
+    builder.Services.AddScoped<IContatoService, ContatoService>();
     builder.Services.AddScoped<IGenericRepository<Contato>, GenericRepository<Contato>>();
     builder.Services.AddSwaggerGen();
 }

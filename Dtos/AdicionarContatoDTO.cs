@@ -1,8 +1,7 @@
-﻿namespace Agenda.ViewModels
+﻿namespace Agenda.Dtos
 {
-    public class EditarContatoViewModel : ViewModel
+    public class AdicionarContatoDTO : DTO
     {
-        public int Id { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
         public string Telefone { get; set; }
