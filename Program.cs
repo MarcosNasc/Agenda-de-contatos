@@ -1,4 +1,4 @@
-using Agenda.Data;
+ using Agenda.Data;
 using Agenda.Models;
 using Agenda.Repository;
 using Agenda.Repository.Iterfaces;
@@ -19,7 +19,7 @@ void ConfigureServices(WebApplicationBuilder builder)
     builder.Services.AddControllers();
     ConfigureDatabase(builder);
     builder.Services.AddScoped<IContatoService, ContatoService>();
-    builder.Services.AddScoped<IGenericRepository<Contato>, GenericRepository<Contato>>();
+    builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
     builder.Services.AddSwaggerGen();
 }
 
